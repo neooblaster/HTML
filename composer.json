@@ -3,6 +3,7 @@
     "description": "A JavaScript class to build DOM from JSON.",
     "type": "library",
     "keywords": ["JavaScript", "DOM", "HTML", "JSON"],
+    "licence": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Nicolas DUPRE",
