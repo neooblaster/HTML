@@ -4,6 +4,12 @@
 		<script type="text/javascript" src="../../src/HTML.js" ></script>
 	</head>
 	<body>
+
+		<div id="article" class="bg-red">
+			<h1>Title</h1>
+			<p>Paragraph</p>
+		</div>
+
 		<pre>
 		HTML().compose({
 			name: "div",
@@ -17,6 +23,24 @@
 			}
 		});
 		</pre>
+
+        <pre>
+            var element = document.querySelector('#article');
+
+            new HTML().compose({
+                element: element,
+                classList: ['font-size', 'text-decoration']
+            });
+        </pre>
+
+        <pre>
+            var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
+            new HTML().compose({
+                element: svg,
+                classList: ['font-size', 'text-decoration']
+            });
+        </pre>
 
 		<pre>
 		HTML().composeTemplate('&lt;div>&lt;/div>');

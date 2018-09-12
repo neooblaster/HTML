@@ -76,16 +76,16 @@ STRUCTURE strListFunction
 END STRUCTURE
 
 
-STRUCTURE strBuildHTML
-    name:       typeof String                   - Stand for resulting tag name
-    element:    typeof HTMLElement              - to pass an existing HTMLElement
+STRUCTURE strBuildHTML -- All attributes are optionnal
+    name:       typeof String                   -- Stand for resulting tag name
+    element:    typeof HTMLElement              -- to pass an existing HTMLElement
         (priority on name)
     
-    classList:  typeof Array of String          - List of CSS classes to append
-    attributes: typeof Object using strListJSON - List of HTML attribute to append
-    properties: typeof Object using strListJSON - List of HTML properties to append
-    children:   typeof Array of strBuildHTML    - Childs element to build and to append
-    functions:  typeof Array of strListFunction - List of function to execute before 
+    classList:  typeof Array of String          -- List of CSS classes to append
+    attributes: typeof Object using strListJSON -- List of HTML attribute to append
+    properties: typeof Object using strListJSON -- List of HTML properties to append
+    children:   typeof Array of strBuildHTML    -- Childs element to build and to append
+    functions:  typeof Array of strListFunction -- List of function to execute before 
         returning generated HTMLElement
 END STRUCTURE
 ````
@@ -177,8 +177,7 @@ Will result :
 ## ``properties``
 
 The attribute ``properties`` of the structure `strBuildHTML` is similare to
-``attributes``. It allows you to add/edit HTMLElement properties as-in  
-a JavaScript script
+``attributes``. It allows you to add/edit HTMLElement properties as-in a JavaScript script
 
 ````js
 new HTML().compose({properties: {textContent: 'Text Here'}});

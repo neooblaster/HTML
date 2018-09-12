@@ -8,12 +8,17 @@
  /** ---                                                                                                         --- **
  /** ---        @author  : Nicolas DUPRE                                                                         --- **
  /** ---        @release : 10.09.2018                                                                            --- **
- /** ---        @version : 1.2.0                                                                                 --- **
+ /** ---        @version : 1.3.0                                                                                 --- **
  /** ---                                                                                                         --- **
  /** ---                                                                                                         --- **
  /** ---                                       -----------------------------                                     --- **
  /** ---                                            { C H A N G E L O G }                                        --- **
  /** ---                                       -----------------------------                                     --- **
+ /** ---                                                                                                         --- **
+ /** ---        VERSION 1.3.0: 10.09.2018 : NDU                                                                  --- **
+ /** ---        --------------------------------                                                                 --- **
+ /** ---            - Correction du test de validation de l'élement HTML passé dans strBuildJSON.element         --- **
+ /** ---            - Ajout de la prise en charge des elements SVGSVGElement (createElementNS:svg)               --- **
  /** ---                                                                                                         --- **
  /** ---        VERSION 1.2.0 : 10.09.2018 : NDU                                                                 --- **
  /** ---        --------------------------------                                                                 --- **
@@ -53,29 +58,28 @@
  Déclaration des structure de donnée :
  -------------------------------------
 
- ? signifie facultatif
-
-
- STRUCTURE strBuildHTML
- name: String                               // Nom de la balise
- ?element: HTMLElement                      // Elemnt HTML directement défini (prioritaire sur name)
- ?classList: Array of String                // Liste des classes CSS à appliquer
- ?attributes: List of strListJSON in Object // Attribut à définir
- ?properties: List of strListJSON in Object // Propriété JavaScript de l'objet à manipuler
- ?children: Array of strBuildHTML           // structure des element HTML element
- ?functions: Array of strListFunction       // Liste des fonctions à executer lors de la construction
- FIN STRUCTURE
-
 
  STRUCTURE strListJSON
- name: String
- value: Mixed
- FIN STRUCTURE
+    name:  typeof String
+    value: typeof Mixed
+ END STRUCTURE
+
 
  STRUCTURE strListFunction
- function: Function(callable)
- args    : Array
- FIN STRUCTURE
+    function:   typeof function (callable)
+    args:       typeof Array
+ END STRUCTURE
+
+
+ STRUCTURE strBuildHTML -- All attributes are optionnal
+    name:       typeof String                   -- Stand for resulting tag name
+    element:    typeof HTMLElement              -- to pass an existing HTMLElement (priority on name)
+    classList:  typeof Array of String          -- List of CSS classes to append
+    attributes: typeof Object using strListJSON -- List of HTML attribute to append
+    properties: typeof Object using strListJSON -- List of HTML properties to append
+    children:   typeof Array of strBuildHTML    -- Childs element to build and to append
+    functions:  typeof Array of strListFunction -- List of function to execute before returning generated HTMLElement
+ END STRUCTURE
 
 
 
@@ -164,7 +168,13 @@ function HTML(){
         element = document.createElement(tag);
 
         // Si element défini, alors remplacer l'éventuel élément créer à partir de NAME
-        if(structure.element !== undefined && structure.element instanceof HTMLElement){
+        if(
+            structure.element !== undefined &&
+            (
+                (structure.element instanceof HTMLElement)
+                || (structure.element instanceof SVGSVGElement)
+            )
+        ){
             element = structure.element;
         }
 
