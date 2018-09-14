@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
+        <link href="../lib/Prism/prism-monokai.css" type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="../../src/HTML.js" ></script>
+		<script type="text/javascript" src="../lib/Prism/prism.js" ></script>
+		<script type="text/javascript" src="../lib/Prism/suprismToEntities.js" ></script>
 	</head>
 	<body>
 
-		<div id="article" class="bg-red">
-			<h1>Title</h1>
-			<p>Paragraph</p>
-		</div>
-
-		<pre>
+		<pre><code class="language-js">
 		HTML().compose({
 			name: "div",
 			classList: ["cl1", "cl2"],
@@ -22,32 +20,58 @@
 				innerHTML: "Text with HTML balise"
 			}
 		});
-		</pre>
+        </code></pre>
 
-        <pre>
-            var element = document.querySelector('#article');
 
-            new HTML().compose({
-                element: element,
-                classList: ['font-size', 'text-decoration']
-            });
-        </pre>
+        <div id="article" class="bg-red" style="display: none;">
+            <h1>Title</h1>
+            <p>Paragraph</p>
+        </div>
 
-        <pre>
-            var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        <pre><code class="language-js">
+        var element = document.querySelector('#article');
 
-            new HTML().compose({
-                element: svg,
-                classList: ['font-size', 'text-decoration']
-            });
-        </pre>
+        new HTML().compose({
+            element: element,
+            classList: ['font-size', 'text-decoration']
+        });
+        </code></pre>
 
-		<pre>
-		HTML().composeTemplate('&lt;div>&lt;/div>');
-		</pre>
+        <pre><code class="language-js">
+        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 
-		<pre>
-		HTML().compose({});
-		</pre>
+        new HTML().compose({
+            element: svg,
+            classList: ['font-size', 'text-decoration']
+        });
+        </code></pre>
+
+        <pre><code class="language-js">
+        HTML().composeTemplate('&lt;div>&lt;/div>');
+        </code></pre>
+
+        <pre><code class="language-js">
+        HTML().compose({});
+        </code></pre>
+
+        <pre><code class="language-js">
+		HTML().compose({
+            functions: [
+                {function: function(a,b,c,d){
+                    console.log(this, a, b, c, d)
+                }, args: [1, 2, 4]}
+            ]
+        });
+        </code></pre>
+
+        <pre><code class="language-js">
+		HTML().compose({
+            functions: [
+                {function: function(a,b,c,d){
+                    console.log(this, a, b, c, d)
+                }.bind([]), args: [1, 2, 4]}
+            ]
+        });
+        </code></pre>
 	</body>
 </html>

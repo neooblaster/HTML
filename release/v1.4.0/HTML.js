@@ -67,25 +67,25 @@
 
 
  STRUCTURE strListJSON
-    name:  typeof String
-    value: typeof Mixed
+ name:  typeof String
+ value: typeof Mixed
  END STRUCTURE
 
 
  STRUCTURE strListFunction
-    function:   typeof function (callable)
-    args:       typeof Array
+ function:   typeof function (callable)
+ args:       typeof Array
  END STRUCTURE
 
 
  STRUCTURE strBuildHTML -- All attributes are optionnal
-    name:       typeof String                   -- Stand for resulting tag name
-    element:    typeof HTMLElement              -- to pass an existing HTMLElement (priority on name)
-    classList:  typeof Array of String          -- List of CSS classes to append
-    attributes: typeof Object using strListJSON -- List of HTML attribute to append
-    properties: typeof Object using strListJSON -- List of HTML properties to append
-    children:   typeof Array of strBuildHTML    -- Childs element to build and to append
-    functions:  typeof Array of strListFunction -- List of function to execute before returning generated HTMLElement
+ name:       typeof String                   -- Stand for resulting tag name
+ element:    typeof HTMLElement              -- to pass an existing HTMLElement (priority on name)
+ classList:  typeof Array of String          -- List of CSS classes to append
+ attributes: typeof Object using strListJSON -- List of HTML attribute to append
+ properties: typeof Object using strListJSON -- List of HTML properties to append
+ children:   typeof Array of strBuildHTML    -- Childs element to build and to append
+ functions:  typeof Array of strListFunction -- List of function to execute before returning generated HTMLElement
  END STRUCTURE
 
 
